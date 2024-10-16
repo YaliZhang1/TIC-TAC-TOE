@@ -137,28 +137,6 @@ const GameController = (function () {
     if (!gameSet) {
       return;
     }
-
-    // while (true) {
-    //   const player = players[currentPlayerIdx];
-
-    //   const round = playRound(player);
-
-    //   if (!round) {
-    //     console.log("Game terminated!");
-    //     return;
-    //   }
-
-    //   if (Gameboard.checkWin(player.mark)) {
-    //     console.log(`${player.name} wins!`);
-    //     return;
-    //   }
-
-    //   if (Gameboard.checkTie()) {
-    //     console.log("It's a tie!");
-    //     return;
-    //   }
-
-    //}
   }
 
   return {
