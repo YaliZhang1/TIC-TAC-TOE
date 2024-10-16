@@ -46,10 +46,11 @@ const Gameboard = (function () {
     for (let i = 0; i < gameboard.length; i++) {
       let cell = document.getElementById(`cell${i}`);
       cell.textContent = gameboard[i];
-      cell.classList.remove("text-primary", "text-danger");
 
       if (cell.textContent === "") {
-        cell.onclick = () => GameController.playRound(i);
+        cell.onclick = () => {
+          GameController.playRound(i);
+        };
       } else {
         if (cell.textContent === "X") {
           cell.classList.add("text-primary");
@@ -66,19 +67,15 @@ const Gameboard = (function () {
     setCell,
     resetCells,
     render,
-
     disableBoard,
   };
 })();
 
 const GameController = (function () {
-  //creates an array with a length of 2, filled with undefined elements.
   const players = Array(2);
   let currentPlayerIdx = 0;
   let gameOn = false;
-
   let txtDisplayDiv = document.querySelector("#text-display");
-
   function createPlayer(name, mark) {
     return { name, mark };
   }
@@ -88,17 +85,14 @@ const GameController = (function () {
     const p2Name = document.getElementById("p2-name-input").value.trim();
 
     if (!p1Name || !p2Name) {
-      txtDisplayDiv.style.color = "lightslategrey";
       txtDisplayDiv.textContent = "Please enter player names!";
       return false;
     }
 
     if (p1Name === p2Name) {
-      txtDisplayDiv.style.color = "lightslategrey";
       txtDisplayDiv.textContent = "Player names must be different!";
       return false;
     }
-
     players[0] = createPlayer(p1Name, "X");
     players[1] = createPlayer(p2Name, "O");
 
@@ -106,7 +100,6 @@ const GameController = (function () {
     Gameboard.render();
 
     currentPlayerIdx = 0;
-    txtDisplayDiv.textContent = `It's ${players[currentPlayerIdx].name}'s turn'!`;
     gameOn = true;
     return true;
   }
@@ -116,6 +109,7 @@ const GameController = (function () {
     if (!isCellSet) {
       return;
     }
+
     Gameboard.render();
 
     if (Gameboard.checkWin(players[currentPlayerIdx].mark)) {
@@ -143,6 +137,28 @@ const GameController = (function () {
     if (!gameSet) {
       return;
     }
+
+    // while (true) {
+    //   const player = players[currentPlayerIdx];
+
+    //   const round = playRound(player);
+
+    //   if (!round) {
+    //     console.log("Game terminated!");
+    //     return;
+    //   }
+
+    //   if (Gameboard.checkWin(player.mark)) {
+    //     console.log(`${player.name} wins!`);
+    //     return;
+    //   }
+
+    //   if (Gameboard.checkTie()) {
+    //     console.log("It's a tie!");
+    //     return;
+    //   }
+
+    //}
   }
 
   return {
